@@ -1,0 +1,6 @@
+2018-06-27 17:42:52,594 INFO 10972 [model] [35mSELECT VERSION() as `version`[39m (2ms)
+2018-06-27 17:42:52,605 INFO 10972 [model] [35mSELECT 1+1 AS result[39m (1ms)
+2018-06-27 17:42:51,973 INFO 10972 [egg:logger] init all loggers with options: {"dir":"D:\\zhaoyuxiang.cn\\zhaoyuxiang.cn-egg\\logs\\@zhaoyuxiang.cn\\zhaoyuxiang.cn-egg","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"@zhaoyuxiang.cn/zhaoyuxiang.cn-egg-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":true,"type":"agent"}
+2018-06-27 17:42:52,521 INFO 10972 [egg:core] dump config after load, 8ms
+2018-06-27 17:42:52,548 INFO 10972 [egg-watcher:agent] watcher start success
+2018-06-27 17:42:52,616 INFO 10972 [egg:core] dump config after ready, 8ms

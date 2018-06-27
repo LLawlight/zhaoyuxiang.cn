@@ -1,0 +1,7 @@
+
+type Query {
+  post(id: ID!): Post,
+  posts(page: Int!): [Post!]
+
+  user(code: String!): User
+}

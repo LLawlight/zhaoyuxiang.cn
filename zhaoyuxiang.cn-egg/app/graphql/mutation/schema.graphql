@@ -1,0 +1,8 @@
+
+
+type Mutation {
+
+  # Post
+  createPost (title: String!, content: String!): Post
+  deletePost (id: ID!): Post
+}

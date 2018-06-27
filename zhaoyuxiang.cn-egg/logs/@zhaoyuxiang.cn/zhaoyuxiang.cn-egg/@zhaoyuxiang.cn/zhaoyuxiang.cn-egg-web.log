@@ -1,0 +1,7 @@
+2018-06-27 17:42:53,997 INFO 13836 [model] [35mSELECT VERSION() as `version`[39m (2ms)
+2018-06-27 17:42:54,007 INFO 13836 [model] [35mSELECT 1+1 AS result[39m (1ms)
+2018-06-27 17:42:54,076 INFO 13836 [model] [35mCREATE TABLE IF NOT EXISTS `posts` (`id` INTEGER NOT NULL auto_increment , `title` VARCHAR(255), `content` TEXT, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;[39m (66ms)
+2018-06-27 17:42:54,089 INFO 13836 [model] [35mSHOW INDEX FROM `posts` FROM `test`[39m (10ms)
+2018-06-27 17:42:54,116 INFO 13836 [model] [35mCREATE TABLE IF NOT EXISTS `users` (`id` INTEGER NOT NULL auto_increment , `name` VARCHAR(255), `email` VARCHAR(255), `bio` VARCHAR(255), `access_token` VARCHAR(255), `node_id` VARCHAR(255), `avatar_url` VARCHAR(255), `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;[39m (23ms)
+2018-06-27 17:42:54,120 INFO 13836 [model] [35mSHOW INDEX FROM `users` FROM `test`[39m (2ms)
+2018-06-27 17:43:04,665 INFO 13836 [model] [35mSELECT `id`, `title`, `content`, `created_at`, `updated_at` FROM `posts` AS `post` ORDER BY `post`.`created_at` DESC LIMIT 0, 10;[39m (68ms)
