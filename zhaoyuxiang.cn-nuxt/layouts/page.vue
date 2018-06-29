@@ -26,6 +26,7 @@
 
 <script>
 import logo from '~/components/logo.vue'
+import config from '../config.js'
 
 export default {
   data() {
@@ -40,7 +41,7 @@ export default {
 
   methods: {
     login() {
-      window.location.href = 'https://github.com/login/oauth/authorize?client_id=96d281e838dbce3f2d1d'
+      window.location.href = `https://github.com/login/oauth/authorize?client_id=${config.github.client_id}`
     }
   }
 }
