@@ -10,7 +10,7 @@ module.exports = {
     database: 'zhaoyuxiang',
     host: 'localhost',
     port: '3306',
-    username: 'zhaoyuxiang',
+    username: 'root',
     password: '66399188',
   }
 };
