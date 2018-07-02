@@ -1,5 +1,11 @@
+const nuxtConfig = require('../nuxt.config')
+
 export default function ({ $axios, redirect }) {
   $axios.onRequest(config => {
+    if (!nuxtConfig.dev) {
+      config.baseURL = 'http://118.24.52.91:7001/graphql'
+    }
+
     if (config.type == 'graphql') {
       config.method = 'post'
       config.headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}

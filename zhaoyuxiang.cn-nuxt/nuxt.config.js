@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
   head: {
     titleTemplate: '%s - 华米兹之家',
     meta: [
@@ -17,7 +17,7 @@ const config = {
   transition: 'page',
 
   modules: [
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
 
   plugins: ['~/plugins/axios'],
@@ -28,5 +28,3 @@ const config = {
     prefix: '/graphql'
   }
 }
-
-module.exports = config
