@@ -23,14 +23,10 @@ const config = {
   plugins: ['~/plugins/axios'],
 
   axios: {
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 7001,
     prefix: '/graphql'
   }
-}
-
-if (!config.dev) {
-  config.axios.host = '118.24.52.91'
 }
 
 module.exports = config
