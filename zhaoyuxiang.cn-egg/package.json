@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "egg-bin dev",
-    "start": "EGG_SERVER_ENV=prod egg-bin dev",
+    "start": "egg-scripts start --daemon --env=prod",
+    "stop": "egg-scripts stop",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +18,7 @@
     "egg-graphql": "^2.1.0",
     "egg-jwt": "^3.0.0",
     "egg-mysql": "^3.0.0",
+    "egg-scripts": "^2.6.0",
     "egg-sequelize": "^3.1.4",
     "egg-validate": "^1.0.0",
     "mysql2": "^1.5.3"
