@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   head: {
     titleTemplate: '%s - 华米兹之家',
     meta: [
@@ -28,3 +28,9 @@ module.exports = {
     prefix: '/graphql'
   }
 }
+
+if (!config.dev) {
+  config.axios.host = '118.24.52.91'
+}
+
+module.exports = config
