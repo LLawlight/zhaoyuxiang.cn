@@ -8,7 +8,7 @@
       </nav>
     </header>
     <main>
-      <logo v-if="logoWidth" :width="logoWidth" :height="logoWidth" lineWidth="6" lineColor="white" backgroundColor="black" />
+      <logo v-if="logoWidth" :size="logoWidth" />
     </main>
     <footer>
       <p>Made with ❤ by L·Lawliet</p>
@@ -39,23 +39,15 @@ export default {
   },
 
   mounted() {
-    this.getLogoWidth()
-
-    window.onresize = () => {
-      this.getLogoWidth()
-    }
+    this.renderLogo()
   },
 
   methods: {
-    getLogoWidth() {
-      this.logoWidth = ''
+    renderLogo() {
+      const width = document.documentElement.clientWidth
+      const height = document.documentElement.clientHeight - 64 * 2
 
-      this.$nextTick(() => {
-        const width = document.documentElement.clientWidth
-        const height = document.documentElement.clientHeight - 64 * 2
-
-        this.logoWidth = (width < height ? width : height) * .8
-      })
+      this.logoWidth = (width < height ? width : height) * .8
     }
   }
 }
