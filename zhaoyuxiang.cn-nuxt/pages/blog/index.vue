@@ -2,7 +2,8 @@
   <ul class="blogs">
     <li v-for="(post, index) in list" :key="index">
       <nuxt-link :to="`/blog/${post.id}`">{{post.title}}</nuxt-link>
-      <button @click="deletePost(post.id)">删除</button>
+      <button @click="editPost(post.id)">修改</button>
+      <button @click="deletePost(post.id, index)">删除</button>
     </li>
   </ul>
 </template>
@@ -42,7 +43,11 @@ export default {
   },
 
   methods: {
-    deletePost(id) {
+    editPost(id) {
+      this.$router.push(`/blog/create?id=${id}`)
+    },
+
+    deletePost(id, index) {
       this.$axios({
         type: 'graphql',
         query: `mutation {
@@ -53,7 +58,7 @@ export default {
         }`
       })
       .then(res => {
-        console.log(res)
+        this.list.slice(index, 1)
       })
     }
   }

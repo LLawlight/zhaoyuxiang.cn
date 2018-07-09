@@ -9,7 +9,8 @@ module.exports = {
   },
 
   css: [
-    { src: '~assets/css/main.less', lang: 'less' }
+    { src: '~assets/css/main.less', lang: 'less' },
+    { src: '~assets/css/github-markdown.css', lang: 'css' }
   ],
 
   dev: (process.env.NODE_ENV !== 'production'),

@@ -21,11 +21,13 @@ class AuthConnector {
     }
     
     if (!user) {
-      user = await this.ctx.app.model.User.create(userInfo);
+      await this.ctx.app.model.User.create(userInfo);
     }
     else {
-      user = await this.ctx.app.model.User.update(userInfo, { where: { node_id } });
+      await this.ctx.app.model.User.update(userInfo, { where: { node_id } })
     }
+
+    user = await this.ctx.app.model.User.findOne({ where: { node_id } })
 
     user.token = this.ctx.service.auth.createToken({
       id: user.id,

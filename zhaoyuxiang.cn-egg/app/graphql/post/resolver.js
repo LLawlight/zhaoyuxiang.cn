@@ -13,9 +13,10 @@ module.exports = {
   Mutation: {
     createPost(root, {
       title,
-      content
+      content,
+      id
     }, ctx) {
-      return ctx.connector.post.create(title, content);
+      return ctx.connector.post.create(title, content, id);
     },
 
     deletePost(root, { id }, ctx) {

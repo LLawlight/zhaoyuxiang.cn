@@ -2,8 +2,10 @@
 <div class="blog-create">
   <input type="text" v-model="title" />
   <div class="edit-area">
-    <textarea v-model="content"></textarea>
-    <div class="preview-area" v-html="previewContent"></div>
+    <textarea v-model="content" spellcheck="false"></textarea>
+    <div class="preview-area">
+      <div class="markdown-body" v-html="previewContent"></div>
+    </div>
   </div>
   <button @click="submit">提交</button>
 </div>
@@ -21,6 +23,7 @@ export default {
 
   data() {
     return {
+      id: '',
       title: '',
       content: ''
     }
@@ -32,19 +35,51 @@ export default {
     }
   },
 
+  mounted() {
+    this.id = this.$route.query.id
+
+    if (this.id) {
+      this.getPost()
+    }
+  },
+
   methods: {
     submit() {
       this.$axios({
         type: 'graphql',
         query:
           `mutation {
-            createPost(title: "${this.title}", content: "${this.content}") {
+            createPost(title: "${this.title}", content: "${this.content.replace(/\n/g, '\\n')}", id: "${this.id}") {
               title,
               content
             }
           }`
-      }, res => {
-        console.log(res)
+      })
+      .then(res => {
+        console.log('res', res)
+        // this.$router.back()
+      })
+      .catch(err => {
+        console.log('err123', err)
+      })
+    },
+
+    getPost() {
+      this.$axios({
+        type: 'graphql',
+        query: `{
+          post(id: "${this.$route.query.id}") {
+            title,
+            content,
+            created_at
+          }
+        }`
+      })
+      .then(res => {
+        const { title, content } = res.data.post
+        this.title = title
+        // post.content = marked(post.content)
+        this.content = content
       })
     }
   }

@@ -1,6 +1,17 @@
 const nuxtConfig = require('../nuxt.config')
 
 export default function ({ $axios, redirect }) {
+  $axios.interceptors.response.use(function(response) {
+    if (response.data.errors && response.data.errors.length) {
+      return Promise.reject(response.data.errors[0].message)
+    }
+    else {
+      return response.data
+    }
+  }, function(error) {
+    return Promise.reject(error)
+  })
+
   $axios.onRequest(config => {
     if (!nuxtConfig.dev) {
       config.baseURL = 'http://118.24.52.91:7001/graphql'
@@ -16,14 +27,15 @@ export default function ({ $axios, redirect }) {
   })
 
   $axios.onResponse(response => {
-    response = response.data
     return response
   })
 
   $axios.onError(error => {
-    const code = parseInt(error.response && error.response.status)
-    if (code === 400) {
-      redirect('/400')
+    if (error.status != 200) {
+      error = {
+        msg: '系统错误！'
+      }
     }
+    return Promise.reject(error)
   })
 }
