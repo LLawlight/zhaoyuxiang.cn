@@ -35,6 +35,8 @@ class AuthConnector {
       node_id: user.node_id
     });
 
+    user.is_admin = user.node_id == this.ctx.app.config.github.node_id;
+
     return user;
   }
 }

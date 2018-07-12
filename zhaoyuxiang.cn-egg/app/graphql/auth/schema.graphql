@@ -4,5 +4,6 @@ type User {
   bio: String!
   created_at: String!
   updated_at: String!
-  token: String!
+  token: String!,
+  is_admin: Boolean!
 }

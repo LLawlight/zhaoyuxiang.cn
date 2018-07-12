@@ -2,13 +2,20 @@
   <div class="page">
     <header>
       <div class="header">
-        <nuxt-link class="logo-container" to="/">
-          <logo lineColor="white" />
-        </nuxt-link>
+        <div class="header-main">
+          <nuxt-link class="logo-container" to="/">
+            <logo />
+          </nuxt-link>
+          <div class="header-buttons">
+            <a v-if="!isLogin" :href="loginHref"><wired-button>登录</wired-button></a>
+            <nuxt-link v-if="isLogin && isHost" to="/blog/create"><wired-button>写文章</wired-button></nuxt-link>
+          </div>
+        </div>
+
         <nav>
-          <nuxt-link to="/blog">博客</nuxt-link>
-          <nuxt-link to="/friends">友链</nuxt-link>
-          <nuxt-link to="/about">关于</nuxt-link>
+          <nuxt-link to="/blog"><wired-button>博客</wired-button></nuxt-link>
+          <nuxt-link to="/friends"><wired-button>友链</wired-button></nuxt-link>
+          <nuxt-link to="/about"><wired-button>关于</wired-button></nuxt-link>
         </nav>
       </div>
     </header>
@@ -18,7 +25,7 @@
       </div>
     </main>
     <footer>
-      <p>Made with ❤ by <span @click="login">L·Lawliet</span></p>
+      <p>Made with ❤ by L·Lawliet</p>
       <p>&copy; 1993 - {{nowYear}}</p>
     </footer>
   </div>
@@ -31,7 +38,10 @@ import config from '../config.js'
 export default {
   data() {
     return {
-      nowYear: new Date().getFullYear()
+      nowYear: new Date().getFullYear(),
+      loginHref: `https://github.com/login/oauth/authorize?client_id=${config.github.client_id}`,
+      isLogin: false,
+      isHost: false
     }
   },
 
@@ -39,10 +49,9 @@ export default {
     logo
   },
 
-  methods: {
-    login() {
-      window.location.href = `https://github.com/login/oauth/authorize?client_id=${config.github.client_id}`
-    }
+  mounted() {
+    this.isLogin = !!localStorage.getItem('token')
+    this.isHost = Boolean(localStorage.getItem('is_admin'))
   }
 }
 </script>
@@ -67,32 +76,47 @@ export default {
   }
 
   header {
-    border-bottom: 1px solid gray;
-
     .header {
       max-width: 1024px;
       margin: auto;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
-    }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      a {
-        margin-left: 16px;
+      .header-main {
+        height: 66px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+
+        .logo-container {
+          padding: 6px;
+          margin-top: 3px;
+          border-radius: 6px;
+          background: black;
+          display: inline-block;
+          font-size: 0;
+        }
+
+        .header-buttons {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+        }
       }
-    }
-    .logo-container {
-      width: 56px;
-      height: 56px;
-      border-radius: 5px;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 66px;
+
+        a {
+          margin: 0 16px;
+        }
+      }
     }
   }
 
@@ -110,6 +134,12 @@ export default {
     font-size: 12px;
     flex-direction: column;
     justify-content: space-around;
+  }
+
+  @media (max-width: 768px) {
+    header, main {
+      padding: 16px;
+    }
   }
 }
 </style>

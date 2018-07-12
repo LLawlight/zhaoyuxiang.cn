@@ -6,17 +6,19 @@ module.exports = {
     },
 
     posts(root, { page = 1 }, ctx) {
-      return ctx.connector.post.fetchList(page);
+      const posts = ctx.connector.post.fetchList(page);
+      return posts;
     }
   },
 
   Mutation: {
     createPost(root, {
       title,
+      cover,
       content,
       id
     }, ctx) {
-      return ctx.connector.post.create(title, content, id);
+      return ctx.connector.post.create(title, cover, content, id);
     },
 
     deletePost(root, { id }, ctx) {

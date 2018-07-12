@@ -31,11 +31,6 @@ export default {
       default: 'white'
     },
 
-    lineWidth: {
-      type: Number,
-      default: 6
-    },
-
     backgroundColor: {
       type: String,
       default: 'transparent'
@@ -46,15 +41,14 @@ export default {
       default: 6
     }
   },
-
   mounted() {
     this.$nextTick(this.draw)
-
   },
 
   methods: {
     draw() {
       const canvas = document.getElementById(this.id)
+      if (!canvas) return
       const scaleFactor = window.devicePixelRatio
       canvas.style.backgroundColor = this.backgroundColor
       canvas.style.width = this.size + 'px'
@@ -70,7 +64,7 @@ export default {
 
       const ctx = canvas.getContext('2d')
 
-      ctx.lineWidth = this.lineWidth
+      ctx.lineWidth = 6 / 480 * this.size
       ctx.strokeStyle = this.lineColor
       ctx.lineJoin = 'round'
 

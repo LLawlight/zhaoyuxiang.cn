@@ -1,14 +1,31 @@
 <template>
   <ul class="blogs">
     <li v-for="(post, index) in list" :key="index">
-      <nuxt-link :to="`/blog/${post.id}`">{{post.title}}</nuxt-link>
-      <button @click="editPost(post.id)">修改</button>
-      <button @click="deletePost(post.id, index)">删除</button>
+      <nuxt-link :to="`/blog/${post.id}`">
+        <h3>{{post.title}}</h3>
+        <div class="post-main">
+          <div class="cover" v-if="post.cover">
+            <img :src="post.cover" />
+          </div>
+          <div class="content">
+            <p>{{post.content}}</p>
+          </div>
+        </div>
+      </nuxt-link>
+      <div class="footer">
+        <span class="c">创建于{{post.created_at}}</span>
+        <div class="action-buttons" v-if="isHost">
+          <wired-button @click="editPost(post.id)">修改</wired-button>
+          <wired-button @click="deletePost(post.id, index)">删除</wired-button>
+        </div>
+      </div>
     </li>
   </ul>
 </template>
 
 <script>
+import axios from '~/plugins/axios'
+
 export default {
   layout: 'page',
 
@@ -18,37 +35,63 @@ export default {
     }
   },
 
-  data() {
-    return {
-      list: [],
-      page: 1
-    }
-  },
-
-  mounted() {
-    this.$axios({
+  asyncData() {
+    return axios({
       type: 'graphql',
       query: `{
-        posts(page: ${this.page++}) {
+        posts(page: 1) {
           id,
           title,
+          cover,
           content,
           created_at
         }
       }`
     })
     .then(res => {
-      this.list = res.data.posts
+      return {
+        list: res.data.posts
+      }
     })
   },
 
+  data() {
+    return {
+      list: [],
+      page: 2,
+      isHost: false
+    }
+  },
+
+  mounted() {
+    this.isHost = Boolean(localStorage.getItem('is_admin'))
+  },
+
   methods: {
+    getPostList() {
+      axios({
+        type: 'graphql',
+        query: `{
+          posts(page: ${this.page++}) {
+            id,
+            title,
+            cover,
+            content,
+            created_at
+          }
+        }`
+      })
+      .then(res => {
+        this.list = this.list.concat(res.data.posts)
+      })
+    },
+
     editPost(id) {
       this.$router.push(`/blog/create?id=${id}`)
     },
 
     deletePost(id, index) {
-      this.$axios({
+      axios({
         type: 'graphql',
         query: `mutation {
           deletePost(id: "${id}") {
@@ -58,9 +101,78 @@ export default {
         }`
       })
       .then(res => {
-        this.list.slice(index, 1)
+        this.list.splice(index, 1)
       })
     }
   }
 }
 </script>
+
+<style lang="less">
+.blogs {
+  .post-main {
+    display: flex;
+
+    .cover {
+      width: 160px;
+      height: 90px;
+      flex-shrink: 0;
+      margin-right: 10px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .content {
+      p {
+        word-break: break-all;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
+        color: #444;
+      }
+    }
+  }
+
+  .footer {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #8590a6;
+
+    .action-buttons {
+      flex-shrink: 0;
+
+      wired-button {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .post-main {
+      flex-direction: column;
+
+      .cover {
+        width: 100%;
+        height: 180px;
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+
+      .content {
+        p {
+          -webkit-line-clamp: 3;
+        }
+      }
+    }
+  }
+}
+</style>

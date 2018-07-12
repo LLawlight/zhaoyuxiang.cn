@@ -3,6 +3,6 @@
 type Mutation {
 
   # Post
-  createPost (title: String!, content: String!, id: ID): Post
+  createPost (title: String!, cover: String, content: String!, id: ID): Post
   deletePost (id: ID!): Post
 }

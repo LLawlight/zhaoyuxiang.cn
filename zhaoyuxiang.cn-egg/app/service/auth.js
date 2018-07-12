@@ -59,6 +59,7 @@ class AuthService extends Service {
     });
     // 检查调用是否成功，如果调用失败会抛出异常
     // this.checkSuccess(result);
+    console.log(result.data)
     return result.data;
   }
 

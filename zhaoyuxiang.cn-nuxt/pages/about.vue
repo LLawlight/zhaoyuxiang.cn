@@ -1,5 +1,7 @@
 <template>
-  <div>关于</div>
+  <div class="about">
+    Shout Out To HZFE.
+  </div>
 </template>
 
 <script>
@@ -13,3 +15,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less">
+.about {
+  text-align: center;
+}
+</style>

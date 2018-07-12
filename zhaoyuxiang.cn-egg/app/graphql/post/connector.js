@@ -7,7 +7,7 @@ class PostConnector {
     this.ctx = ctx;
   }
 
-  async create(title, content, id) {
+  async create(title, cover, content, id) {
     let token = this.ctx.request.header.authorization.replace('Bearer ', '');
     let verifyResult = await this.ctx.service.auth.verifyToken(token);
 
@@ -17,20 +17,21 @@ class PostConnector {
       if (id) {
         await this.ctx.app.model.Post.update({
           title,
+          cover,
           content
         }, { where: { id } });
         post = await this.ctx.app.model.Post.findOne({ where: { id } });
       }
       else {
-        post = await this.ctx.app.model.Post.create({ title, content });
+        post = await this.ctx.app.model.Post.create({ title, cover, content });
       }
 
       return post.toJSON();
     }
     else {
       throw new GraphQLError({
-        code: 401,
-        msg: '当前用户没有权限执行该操作！'
+        status: 401,
+        messsag: '当前用户没有权限执行该操作！'
       })
     }
   }
@@ -46,7 +47,10 @@ class PostConnector {
       return ret
     }
     else {
-      throw Error('用户未登录')
+      throw new GraphQLError({
+        status: 401,
+        messsag: '当前用户没有权限执行该操作！'
+      })
     }
   }
 

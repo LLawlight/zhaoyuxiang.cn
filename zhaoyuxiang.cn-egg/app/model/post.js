@@ -3,6 +3,7 @@ module.exports = (app) => {
 
   const Post = app.model.define('post', {
     title: STRING,
+    cover: STRING,
     content: TEXT,
   });
 

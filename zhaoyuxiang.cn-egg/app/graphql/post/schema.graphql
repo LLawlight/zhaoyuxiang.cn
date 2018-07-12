@@ -1,7 +1,8 @@
 type Post {
   id: ID!
   title: String!
+  cover: String!
   content: String!
-  created_at: String!
-  updated_at: String!
+  created_at: Date!
+  updated_at: Date!
 }
