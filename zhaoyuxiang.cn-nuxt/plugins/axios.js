@@ -2,7 +2,7 @@ import * as axios from 'axios'
 
 const options = {}
 
-options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 7001}/graphql`
+options.baseURL = `http://${process.env.HOST || '192.168.10.50'}:${process.env.PORT || 7001}/graphql`
 
 if (process.server) {
   options.headers = {'Content-Type': 'application/json'}
@@ -28,7 +28,16 @@ instance.interceptors.request.use(function (config) {
 
 instance.interceptors.response.use(function (response) {
   if (response.data.errors && response.data.errors.length) {
-    return Promise.reject(response.data.errors[0].message)
+    const errorMessage = response.data.errors[0].message
+
+    if (errorMessage.status == 401) {
+      if (window) {
+        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('is_admin')
+      }
+    }
+
+    return Promise.reject(errorMessage)
   }
   else {
     return response.data

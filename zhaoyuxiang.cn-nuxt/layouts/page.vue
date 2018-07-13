@@ -7,14 +7,15 @@
             <logo />
           </nuxt-link>
           <div class="header-buttons">
-            <a v-if="!isLogin" :href="loginHref"><wired-button>登录</wired-button></a>
             <nuxt-link v-if="isLogin && isHost" to="/blog/create"><wired-button>写文章</wired-button></nuxt-link>
+            <!-- <nuxt-link v-if="isLogin" to="/logout"><wired-button>退出登录</wired-button></nuxt-link> -->
+            <wired-button v-else @click="toLogin">登录</wired-button>
           </div>
         </div>
 
         <nav>
           <nuxt-link to="/blog"><wired-button>博客</wired-button></nuxt-link>
-          <nuxt-link to="/friends"><wired-button>友链</wired-button></nuxt-link>
+          <nuxt-link to="/friends"><wired-button>友人帐</wired-button></nuxt-link>
           <nuxt-link to="/about"><wired-button>关于</wired-button></nuxt-link>
         </nav>
       </div>
@@ -52,6 +53,13 @@ export default {
   mounted() {
     this.isLogin = !!localStorage.getItem('token')
     this.isHost = Boolean(localStorage.getItem('is_admin'))
+  },
+
+  methods: {
+    toLogin() {
+      sessionStorage.setItem('last_url', this.$route.fullPath)
+      window.location.href = this.loginHref
+    }
   }
 }
 </script>
@@ -104,6 +112,7 @@ export default {
           top: 50%;
           right: 0;
           transform: translateY(-50%);
+          font-size: 12px;
         }
       }
 

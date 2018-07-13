@@ -1,12 +1,14 @@
 <template>
-  <div class="friends">
-    <a class="friend" v-for="(friend, index) in friends" :key="index" :href="friend.link">
-      <image-input :src="friend.avatar" width="66px" height="66px" radius="66px"></image-input>
-      <div class="friend-info">
-        <div class="name">{{friend.name}}</div>
-        <div class="intro">{{friend.intro}}</div>
-      </div>
-    </a>
+  <div class="page-friends">
+    <div class="friends">
+      <a class="friend" v-for="(friend, index) in friends" :key="index" :href="friend.link">
+        <image-input :src="friend.avatar" width="66px" height="66px" radius="66px"></image-input>
+        <div class="friend-info">
+          <div class="name">{{friend.name}}</div>
+          <div class="intro">{{friend.intro}}</div>
+        </div>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -18,7 +20,7 @@ export default {
 
   head () {
     return {
-      title: '友链'
+      title: '友人帐'
     }
   },
 
@@ -120,39 +122,41 @@ export default {
 </script>
 
 <style lang="less">
-.friends {
-  max-width: 768px;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-
-  .friend {
+.page-friends {
+  .friends {
+    max-width: 768px;
+    margin: auto;
     display: flex;
-    width: 50%;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    .image-input {
-      margin-right: 10px;
-    }
 
-    .name {
-      font-size: 18px;
-      font-weight: bold;
-    }
+    .friend {
+      display: flex;
+      width: 50%;
+      margin-bottom: 20px;
 
-    .intro {
-      font-size: 14px;
-      color: #646464;
+      .image-input {
+        margin-right: 10px;
+      }
+
+      .name {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .intro {
+        font-size: 14px;
+        color: #646464;
+      }
     }
   }
-}
 
-@media (max-width: 768px) {
-  .friends {
-    .friend {
-      width: 100%;
+  @media (max-width: 768px) {
+    .friends {
+      .friend {
+        width: 100%;
+      }
     }
   }
 }

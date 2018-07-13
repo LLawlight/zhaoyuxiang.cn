@@ -1,5 +1,5 @@
 <template>
-  <canvas :id="id" class="logo" ref="logo"></canvas>
+  <canvas :id="id" class="logo" ref="logo" :width="size" :height="size"></canvas>
 </template>
 
 <script>
@@ -41,6 +41,7 @@ export default {
       default: 6
     }
   },
+
   mounted() {
     this.$nextTick(this.draw)
   },

@@ -59,16 +59,37 @@ export default {
     return {
       list: [],
       page: 2,
-      isHost: false
+      isHost: false,
+      isLoading: false,
+      isLastPage: false
     }
   },
 
+  beforeRouteLeave(to, from, next) {
+    window.onscroll = null
+
+    next()
+  },
+
   mounted() {
-    this.isHost = Boolean(localStorage.getItem('is_admin'))
+    this.isHost = localStorage.getItem('is_admin') == 'true'
+
+    window.onscroll = this.throttle(() => {
+      const scrollTop = document.documentElement.scrollTop
+      const bodyHeight = document.querySelector('body').clientHeight
+      const windowHeight = window.innerHeight
+
+      if (bodyHeight - (scrollTop + windowHeight) < 100) {
+        this.getPostList()
+      }
+    }, 1000)
   },
 
   methods: {
     getPostList() {
+      if (this.isLoading || this.isLastPage) return
+
+      this.isLoading = true
       axios({
         type: 'graphql',
         query: `{
@@ -82,7 +103,14 @@ export default {
         }`
       })
       .then(res => {
-        this.list = this.list.concat(res.data.posts)
+        const list = res.data.posts
+
+        this.list = this.list.concat(list)
+        this.isLoading = false
+
+        if (list.length < 10) {
+          this.isLastPage = true
+        }
       })
     },
 
@@ -101,8 +129,21 @@ export default {
         }`
       })
       .then(res => {
-        this.list.splice(index, 1)
+        this.list.splice(index, 1);
       })
+    },
+
+    throttle(fn, delay) {
+      let startTime = 0
+
+      return function() {
+        const currtTime = +new Date()
+
+        if (currtTime - startTime >= delay) {
+          fn.apply(this, arguments)
+          startTime = currtTime
+        }
+      }
     }
   }
 }

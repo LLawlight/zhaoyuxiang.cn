@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    Shout Out To HZFE.
+    Shout Out To <a href="//hzfe.org" target="_blank">HZFE</a>.
   </div>
 </template>
 
@@ -19,5 +19,9 @@ export default {
 <style lang="less">
 .about {
   text-align: center;
+
+  a {
+    color: #2066c2;
+  }
 }
 </style>
