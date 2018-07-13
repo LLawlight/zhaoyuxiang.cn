@@ -3,8 +3,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "precommit": "lint-staged"
+    "start": "nuxt start"
   },
   "config": {
     "nuxt": {
@@ -22,18 +21,5 @@
     "less-loader": "^4.1.0",
     "marked": "^0.4.0",
     "nuxt": "^1.4.0"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.vue": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "prettier": "1.13.7"
   }
 }
