@@ -12,7 +12,7 @@
     </main>
     <footer>
       <p>Made with ❤ by L·Lawliet</p>
-      <p>&copy; 1993 - {{nowYear}}</p>
+      <p>&copy; 1993 - {{nowYear}} | <a href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备18031309号</a></p>
     </footer>
   </div>
 </template>
@@ -62,6 +62,10 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 
+  a {
+    color: white;
+  }
+
   header, footer {
     padding: 0 32px;
     height: 64px;
@@ -75,12 +79,12 @@ export default {
   }
 
   footer {
+    font-size: 12px;
     flex-direction: column;
   }
 
   nav {
     a {
-      color: white;
       padding: 0 16px;
     }
   }
