@@ -2,7 +2,7 @@ import * as axios from 'axios'
 
 const options = {}
 
-options.baseURL = `http://${process.env.HOST || '192.168.10.50'}:${process.env.PORT || 7001}/graphql`
+options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 7001}/graphql`
 
 if (process.server) {
   options.headers = {'Content-Type': 'application/json'}
