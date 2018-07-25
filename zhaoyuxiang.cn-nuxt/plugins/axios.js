@@ -24,7 +24,7 @@ instance.interceptors.request.use(function (config) {
   if (config.type == 'graphql') {
     config.method = 'post'
     config.data = {}
-    config.data.query = config.query.replace(/"/g, '\"')
+    config.data.query = config.query
     config.data = JSON.stringify(config.data)
   }
 
