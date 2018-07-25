@@ -54,7 +54,7 @@ export default {
         type: 'graphql',
         query:
           `mutation {
-            createPost(title: "${this.title}", cover: "${this.cover}", content: "${this.content.replace(/\n/g, '\\n').replace(/"/g, '\"')}", id: "${this.id}") {
+            createPost(title: "${this.title}", cover: "${this.cover}", content: "${this.content.replace(/\n/g, '\\n').replace(/"/g, '\\"')}", id: "${this.id}") {
               title,
               cover,
               content
