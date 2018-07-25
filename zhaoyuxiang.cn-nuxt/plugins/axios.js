@@ -1,8 +1,15 @@
 import * as axios from 'axios'
+import config from '../nuxt.config'
+
 
 const options = {}
 
-options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 7001}/graphql`
+if (config.dev) {
+  options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 7001}/graphql`
+}
+else {
+  options.baseURL = `http://118.24.52.91:${process.env.PORT || 7001}/graphql`
+}
 
 if (process.server) {
   options.headers = {'Content-Type': 'application/json'}
