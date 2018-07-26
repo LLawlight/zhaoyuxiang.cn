@@ -1,7 +1,7 @@
 <template>
   <div class="page-friends">
     <div class="friends">
-      <a class="friend" v-for="(friend, index) in friends" :key="index" :href="friend.link">
+      <a class="friend" v-for="(friend, index) in friends" :key="index" :href="friend.link" target="_blank">
         <image-input :src="friend.avatar" width="66px" height="66px" radius="66px"></image-input>
         <div class="friend-info">
           <div class="name">{{friend.name}}</div>
