@@ -25,6 +25,7 @@
 
 <script>
 import axios from '~/plugins/axios'
+const removeMd = require('remove-markdown')
 
 export default {
   layout: 'page',
@@ -50,7 +51,10 @@ export default {
     })
     .then(res => {
       return {
-        list: res.data.posts
+        list: res.data.posts.map(post => {
+          post.content = removeMd(post.content)
+          return post
+        })
       }
     })
   },
@@ -103,7 +107,10 @@ export default {
         }`
       })
       .then(res => {
-        const list = res.data.posts
+        const list = res.data.posts.map(post => {
+          post.content = removeMd(post.content)
+          return post
+        })
 
         this.list = this.list.concat(list)
         this.isLoading = false

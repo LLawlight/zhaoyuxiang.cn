@@ -8,19 +8,19 @@ if (config.dev) {
   options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 7001}/graphql`
 }
 else {
-  options.baseURL = `https://api.zhaoyuxiang.cn/graphql`
-}
-
-if (process.server) {
-  options.headers = {'Content-Type': 'application/json'}
-}
-else if (process.client) {
-  options.headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}
+  options.baseURL = `http://api.zhaoyuxiang.cn/graphql`
 }
 
 const instance = axios.create(options);
 
 instance.interceptors.request.use(function (config) {
+  if (process.server) {
+    config.headers = {'Content-Type': 'application/json'}
+  }
+  else if (process.client) {
+    config.headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}
+  }
+
   if (config.type == 'graphql') {
     config.method = 'post'
     config.data = {}
