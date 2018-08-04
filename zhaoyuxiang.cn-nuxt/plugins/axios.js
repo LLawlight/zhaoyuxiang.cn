@@ -8,7 +8,7 @@ if (config.dev) {
   options.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 7001}/graphql`
 }
 else {
-  options.baseURL = 'http://api.zhaoyuxiang.cn/graphql'
+  options.baseURL = 'https://api.zhaoyuxiang.cn/graphql'
 }
 
 const instance = axios.create(options);
