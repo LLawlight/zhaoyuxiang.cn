@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import marked from 'marked'
+import marked from '~/plugins/marked'
 import axios from '~/plugins/axios'
 
 export default {

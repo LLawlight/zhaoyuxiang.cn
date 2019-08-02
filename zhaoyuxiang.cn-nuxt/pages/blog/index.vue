@@ -86,7 +86,7 @@ export default {
       if (bodyHeight - (scrollTop + windowHeight) < 100) {
         this.getPostList()
       }
-    }, 1000)
+    }, 300)
   },
 
   methods: {

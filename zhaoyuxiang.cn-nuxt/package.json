@@ -17,10 +17,12 @@
     "axios": "^0.18.0",
     "blueimp-md5": "^2.10.0",
     "github-markdown-css": "^2.10.0",
+    "highlight.js": "^9.15.8",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "marked": "^0.4.0",
     "nuxt": "^1.4.0",
     "remove-markdown": "^0.3.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -50,6 +50,6 @@ module.exports = {
     host: 'localhost',
     port: '3306',
     username: 'root',
-    password: '66399188',
+    password: 't57u!*@`63?ZoA2;1V',
   }
 };

@@ -1,20 +1,20 @@
 <template>
 <div class="blog-create">
-  <input type="text" v-model="title" />
-  <input type="file" @change="uploadImage">
+  <input type="text" v-model="title" class="title"/>
+  <div class="tools">
+    <input type="file" @change="uploadImage" accept="image/*">
+    <wired-button @click="submit">提交</wired-button>
+  </div>
   <img class="cover" :src="cover" />
   <div class="edit-area">
     <textarea v-model="content" spellcheck="false"></textarea>
-    <div class="preview-area">
-      <div class="markdown-body" v-html="previewContent"></div>
-    </div>
+    <div class="preview-area markdown-body" v-html="previewContent"></div>
   </div>
-  <button @click="submit">提交</button>
 </div>
 </template>
 
 <script>
-import marked from 'marked'
+import marked from '~/plugins/marked'
 import md5 from 'blueimp-md5'
 import axios from '~/plugins/axios'
 
@@ -85,7 +85,6 @@ export default {
         const { title, cover, content } = res.data.post
         this.title = title
         this.cover = cover
-        // post.content = marked(post.content)
         this.content = content
       })
     },
@@ -100,7 +99,7 @@ export default {
         api: 'http://v0.api.upyun.com/',
         bucket: 'zhaoyuxiang',
         apiSecret: 'CF2g51Hq7uNp6rzIYJ0KnDj3Gpk=',
-        domain: '//zhaoyuxiang.test.upcdn.net',
+        domain: '//upyun.res.zhaoyuxiang.cn',
         'save-key': '/img/{year}{mon}{day}/{filemd5}{.suffix}'
       }
 
@@ -130,33 +129,55 @@ export default {
 
 <style lang="less">
 .blog-create {
+  font-size: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: block;
+    width: 100%;
+    padding: 10px 40px;
+    font-size: 30px;
+    font-weight: 400;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+  }
+
+  .tools {
+    padding: 11px 14px;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .cover {
     width: 100%;
   }
 
   .edit-area {
-    border: 1px solid black;
-    min-height: 500px;
     display: flex;
+    flex: 1;
 
-    textarea, .write-area {
+    textarea, .preview-area  {
+      padding: 40px 40px 80px 40px;
+      box-sizing: border-box;
+    }
+
+    textarea {
       resize: none;
       width: 50%;
       border: none;
+      border-right: 1px solid #d9d9d9;
     }
 
     .preview-area {
       position: relative;
       width: 50%;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: black;
-      }
+      height: 100%;
+      overflow: auto;
     }
   }
 }

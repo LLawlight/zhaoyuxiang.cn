@@ -11,7 +11,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.min.js' }
+      { src: 'https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.js', defer: true }
     ],
   },
 
