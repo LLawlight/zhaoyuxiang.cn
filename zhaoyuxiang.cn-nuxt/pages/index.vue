@@ -12,7 +12,7 @@
     </main>
     <footer>
       <p>Made with ❤ by L·Lawliet</p>
-      <p>&copy; 1993 - {{nowYear}} | <a href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备18031309号</a></p>
+      <p>&copy; 1993 - {{nowYear}} | <a href="http://beian.miit.gov.cn" target="_blank">浙ICP备18031309号</a></p>
     </footer>
   </div>
 </template>
