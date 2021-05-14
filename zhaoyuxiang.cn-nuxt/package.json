@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.1",
     "@nuxtjs/proxy": "^1.2.4",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "blueimp-md5": "^2.10.0",
     "github-markdown-css": "^2.10.0",
     "highlight.js": "^9.15.8",
