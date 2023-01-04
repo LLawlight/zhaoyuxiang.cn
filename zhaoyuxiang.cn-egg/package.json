@@ -24,6 +24,6 @@
     "mysql2": "^1.5.3"
   },
   "devDependencies": {
-    "egg-bin": "^4.7.0"
+    "egg-bin": "^4.20.0"
   }
 }
